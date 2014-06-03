@@ -1,4 +1,4 @@
-require_relative "infrastructure/aws"
+require_relative "akashi/aws"
 
-class Infrastructure
+class Akashi
 end
