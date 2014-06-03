@@ -3,7 +3,7 @@ require "yaml"
 require "aws-sdk"
 require_relative "ec2"
 
-class Infrastructure
+class Akashi
   class AWS
     include Singleton
 

@@ -1,4 +1,4 @@
-# Infrastructure
+# Akashi
 Build servers on VPC
 
 ## Configurations

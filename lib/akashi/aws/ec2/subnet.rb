@@ -4,10 +4,10 @@ require_relative "subnet/gateway"
 require_relative "subnet/database"
 require_relative "subnet/web"
 
-class Infrastructure
+class Akashi
   class AWS
     class EC2
-      class Subnet < Infrastructure::AWS::EC2::Base
+      class Subnet < Akashi::AWS::EC2::Base
         class << self
           def next_cidr_block(vpc)
             IPAddr.new(latest_cidr_block.to_i + step, Socket::AF_INET).to_s + "/#{cidr}"
@@ -18,7 +18,7 @@ class Infrastructure
           end
 
           def all(vpc)
-            Infrastructure::AWS.instance.ec2.subnets.select do |subnet|
+            Akashi::AWS.instance.ec2.subnets.select do |subnet|
               subnet.vpc_id == vpc.id && base_cidr_block.include?(subnet.cidr_block)
             end
           end

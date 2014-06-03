@@ -1,7 +1,7 @@
-class Infrastructure
+class Akashi
   class AWS
     class EC2
-      class RouteTable < Infrastructure::AWS::EC2::Base
+      class RouteTable < Akashi::AWS::EC2::Base
         class << self
           def find_by_vpc(vpc)
             find_all_by_vpc.first

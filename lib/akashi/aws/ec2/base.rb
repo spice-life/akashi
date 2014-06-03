@@ -1,9 +1,9 @@
-class Infrastructure
+class Akashi
   class AWS
     class EC2
       class Base
         def initialize
-          @ec2 = Infrastructure::AWS.instance.ec2
+          @ec2 = Akashi::AWS.instance.ec2
         end
 
         def id

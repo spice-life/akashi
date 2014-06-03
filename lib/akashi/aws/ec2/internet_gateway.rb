@@ -1,7 +1,7 @@
-class Infrastructure
+class Akashi
   class AWS
     class EC2
-      class InternetGateway < Infrastructure::AWS::EC2::Base
+      class InternetGateway < Akashi::AWS::EC2::Base
         def create!
           response = @ec2.client.create_internet_gateway
           id = response[:internet_gateway][:internet_gateway_id]
