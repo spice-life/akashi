@@ -1,5 +1,4 @@
-# Akashi
-Build servers on VPC
+# Akashi - Build infrastructure on VPC
 
 ## Usage
 ```
