@@ -1,6 +1,12 @@
 # Akashi
 Build servers on VPC
 
+## Usage
+```
+$ bundle install --without development
+$ akashi application_name environment
+```
+
 ## Configurations
 ### VPC
 10.0.0.0/16
