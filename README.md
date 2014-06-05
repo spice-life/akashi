@@ -1,9 +1,17 @@
 # Akashi - Build infrastructure on VPC
 
-## Usage
+## Introduction
 ```
 $ bundle install --without development
-$ akashi application_name environment
+$ cp config/aws.yml.exapmle config/aws.yml
+$ vi config/aws.yml
+Describe credentials and region of AWS
+```
+
+## Usage
+```
+$ bundle exec bin/akashi <action> <application> <environment>
+action choose from build, destroy (destroy action not implemented yet)
 ```
 
 ## Configurations
