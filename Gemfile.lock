@@ -26,6 +26,7 @@ GEM
     thread_safe (0.3.4)
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+    yamler (0.1.0)
 
 PLATFORMS
   ruby
@@ -34,3 +35,4 @@ DEPENDENCIES
   activesupport
   aws-sdk
   pry
+  yamler

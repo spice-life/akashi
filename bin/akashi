@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
 
-require "yaml"
+require "yamler"
 require "akashi"
 
 unless ARGV.count == 3
@@ -15,15 +15,12 @@ end
 
 action, application, environment = ARGV
 
-path_to = {
-  aws_config: File.expand_path("../config/aws.yml", __dir__),
-  manifests:  File.expand_path("../config/manifests.yml", __dir__),
-}
+config_path = File.expand_path("../config", __dir__)
 
-Akashi::AWS.config = YAML.load_file(path_to[:aws_config])
+Akashi::AWS.config = Yamler.load(File.join(config_path, "aws.yml"))
 
-Akashi.manifests   = YAML.load_file(path_to[:manifests])
 Akashi.application = application
 Akashi.environment = environment
+Akashi.manifest    = Yamler.load(File.join(config_path, "#{Akashi.file_base_name}.yml.erb"))
 
 Akashi.send(action.intern)

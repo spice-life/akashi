@@ -1,7 +1,8 @@
 source "https://rubygems.org"
 
-gem "aws-sdk"
 gem "activesupport"
+gem "aws-sdk"
+gem "yamler"
 
 group :development do
   gem "pry"
