@@ -1,3 +1,4 @@
 .bundle
 vendor/bundle
 config/aws.yml
+private_keys/*.key
