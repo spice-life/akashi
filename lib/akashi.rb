@@ -1,5 +1,6 @@
 require "openssl"
 require "active_support/core_ext"
+require "akashi/aws"
 
 module Akashi
   class << self

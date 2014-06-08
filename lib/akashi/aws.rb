@@ -1,28 +1,37 @@
-require "singleton"
-require "yaml"
 require "aws-sdk"
-require_relative "ec2"
 
-class Akashi
-  class AWS
-    include Singleton
+module Akashi
+  module AWS
+    module_function
 
-    def initialize
-      load_config
+    def config=(new_val)
+      ::AWS.config(new_val)
+      services.each { |service| instance_variable_set(:"@#{service}", nil) }
     end
 
     def ec2
       @ec2 ||= ::AWS::EC2.new
     end
 
-    private
-
-    def load_config
-      ::AWS.config(YAML.load_file(config_path))
+    def elb
+      @elb ||= ::AWS::ELB.new
     end
 
-    def config_path
-      File.expand_path("../../config/aws.yml", __dir__)
+    def iam
+      @iam ||= ::AWS::IAM.new
+    end
+
+    def rds
+      @rds ||= ::AWS::RDS.new
+    end
+
+    def services
+      @services ||= [
+        :ec2,
+        :elb,
+        :iam,
+        :rds,
+      ]
     end
   end
 end
