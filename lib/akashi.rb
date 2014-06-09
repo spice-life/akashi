@@ -63,7 +63,7 @@ module Akashi
       "#{application}-#{environment}"
     end
 
-    def file_base_name
+    def file_name
       "#{application}_#{environment}"
     end
 

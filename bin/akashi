@@ -21,6 +21,6 @@ Akashi::AWS.config = Yamler.load(File.join(config_path, "aws.yml"))
 
 Akashi.application = application
 Akashi.environment = environment
-Akashi.manifest    = Yamler.load(File.join(config_path, "#{Akashi.file_base_name}.yml.erb"))
+Akashi.manifest    = Yamler.load(File.join(config_path, "#{Akashi.file_name}.yml.erb"))
 
 Akashi.send(action.intern)
