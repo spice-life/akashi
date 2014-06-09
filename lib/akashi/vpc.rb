@@ -5,11 +5,11 @@ require "akashi/vpc/subnet"
 
 module Akashi
   class Vpc < Akashi::Vpc::Base
-    class << self
-      def internet_gateway=(internet_gateway)
-        @object.internet_gateway = internet_gateway.id
-      end
+    def internet_gateway=(internet_gateway)
+      @object.internet_gateway = internet_gateway.id
+    end
 
+    class << self
       def create
         response = Akashi::Aws.ec2.client.create_vpc(
           cidr_block:       "10.0.0.0/16",
