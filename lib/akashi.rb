@@ -10,7 +10,7 @@ module Akashi
       vpc = Akashi::VPC.create
 
       internet_gateway = Akashi::VPC::InternetGateway.create
-      vpc.attach_internet_gateway(internet_gateway: internet_gateway)
+      vpc.internet_gateway = internet_gateway
 
       subnets = {}
       roles do |name, role|
