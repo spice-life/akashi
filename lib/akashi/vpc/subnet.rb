@@ -12,6 +12,10 @@ module Akashi
       def cidr_block
         IPAddr.new(@object.cidr_block)
       end
+
+      def route_table=(route_table)
+        @object.route_table = route_table.id
+      end
     end
   end
 end

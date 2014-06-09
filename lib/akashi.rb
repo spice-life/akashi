@@ -28,7 +28,7 @@ module Akashi
       route_table.create_route(gateway: internet_gateway)
       roles do |name, role|
         if !!role["internet_connection"]
-          subnets[name].each { |subnet| route_table.associate_subnet(subnet: subnet) }
+          subnets[name].each { |subnet| subnet.route_table = route_table }
         end
       end
 

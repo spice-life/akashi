@@ -1,5 +1,6 @@
 require "akashi/vpc/base"
 require "akashi/vpc/internet_gateway"
+require "akashi/vpc/route_table"
 require "akashi/vpc/subnet"
 
 module Akashi
