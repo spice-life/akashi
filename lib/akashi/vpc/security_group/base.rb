@@ -13,14 +13,16 @@ module Akashi
               group_name:  name,
               description: name,
             )
-            id     = response[:group_id]
-            object = find(id)
-
-            ingress_ip_permissions.each do |ip|
-              object.authorize_ingress(ip[:protocol], ip[:port], *ip[:sources])
+            object = find(response[:group_id])
+            new(object).tap do |instance|
+              ingress_ip_permissions.each do |ip_permission|
+                instance.authorize_ingress(
+                  ip_permission[:protocol],
+                  ip_permission[:port],
+                  *ip_permission[:sources],
+                )
+              end
             end
-
-            new(object)
           end
 
           def name
