@@ -1,16 +1,16 @@
 require "ipaddr"
 
 module Akashi
-  class VPC
+  class Vpc
     class Subnet
-      class Base < Akashi::VPC::Subnet
+      class Base < Akashi::Vpc::Subnet
         class << self
           def all
             super.select { |subnet| cidr_block.include?(subnet.cidr_block) }
           end
 
           def create(vpc:, availability_zone:)
-            response = Akashi::AWS.ec2.client.create_subnet(
+            response = Akashi::Aws.ec2.client.create_subnet(
               vpc_id:            vpc.id,
               availability_zone: availability_zone,
               cidr_block:        next_cidr_block(vpc: vpc).to_s + "/#{cidr}",

@@ -7,15 +7,15 @@ module Akashi
     attr_accessor :application, :environment, :manifest
 
     def build
-      vpc = Akashi::VPC.create
+      vpc = Akashi::Vpc.create
 
-      internet_gateway = Akashi::VPC::InternetGateway.create
+      internet_gateway = Akashi::Vpc::InternetGateway.create
       vpc.internet_gateway = internet_gateway
 
       subnets = {}
       roles do |name, role|
         subnets[name] = []
-        klass = Akashi::VPC::Subnet.const_get(name.camelize)
+        klass = Akashi::Vpc::Subnet.const_get(name.camelize)
         role["subnets"].each do |subnet|
           subnets[name] << klass.create(
             vpc:               vpc,
@@ -24,7 +24,7 @@ module Akashi
         end
       end
 
-      route_table = Akashi::VPC::RouteTable.where(vpc: vpc).first
+      route_table = Akashi::Vpc::RouteTable.where(vpc: vpc).first
       route_table.create_route(gateway: internet_gateway)
       roles do |name, role|
         if !!role["internet_connection"]
@@ -34,21 +34,21 @@ module Akashi
 
       security_group = {}
       roles do |name, role|
-        klass = Akashi::VPC::SecutiryGroup.const_get(name.camelize)
+        klass = Akashi::Vpc::SecutiryGroup.const_get(name.camelize)
         security_group[name] = klass.create(vpc: vpc)
       end
 
-      Akashi::RDS::SubnetGroup.create(subnets: subnets[:rds])
-      Akashi::RDS.create(security_group: security_group[:rds])
+      Akashi::Rds::SubnetGroup.create(subnets: subnets[:rds])
+      Akashi::Rds.create(security_group: security_group[:rds])
 
       roles do |name, role|
         role["subnets"].each do |subnet|
-          subnet["instances"].each { |instance| Akashi::EC2.create(instance) }
+          subnet["instances"].each { |instance| Akashi::Ec2.create(instance) }
         end
       end
 
-      ssl_certificate = Akashi::ELB::SSLCertificate.create
-      Akashi::ELB.create(
+      ssl_certificate = Akashi::Elb::SslCertificate.create
+      Akashi::Elb.create(
         security_group:  security_group[:elb],
         subnet:          subnets[:elb],
         ssl_certificate: ssl_certificate,

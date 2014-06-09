@@ -1,7 +1,7 @@
 require "aws-sdk"
 
 module Akashi
-  module AWS
+  module Aws
     module_function
 
     def config=(new_val)

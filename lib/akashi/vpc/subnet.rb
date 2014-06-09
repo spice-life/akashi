@@ -5,8 +5,8 @@ require "akashi/vpc/subnet/ssh_gateway"
 require "akashi/vpc/subnet/web_server"
 
 module Akashi
-  class VPC
-    class Subnet < Akashi::VPC::Base
+  class Vpc
+    class Subnet < Akashi::Vpc::Base
       def_delegators :@object, :vpc_id
 
       def cidr_block

@@ -1,7 +1,7 @@
 require "forwardable"
 
 class Akashi
-  class VPC
+  class Vpc
     class Base
       extend Fowardable
 
@@ -13,7 +13,7 @@ class Akashi
 
       class << self
         def all
-          collection = Akashi::AWS.ec2.send(demodulize.underscore.pluralize)
+          collection = Akashi::Aws.ec2.send(demodulize.underscore.pluralize)
           collection.map { |object| new(object.id) }
         end
 

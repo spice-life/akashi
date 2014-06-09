@@ -1,7 +1,7 @@
 module Akashi
-  class VPC
+  class Vpc
     class Subnet
-      class Rds < Akashi::VPC::Subnet::Base
+      class Rds < Akashi::Vpc::Subnet::Base
         class << self
           def cidr_block
             @cidr_block ||= IPAddr.new("10.0.64.0/19")
