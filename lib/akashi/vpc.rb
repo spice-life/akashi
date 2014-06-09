@@ -15,7 +15,8 @@ module Akashi
           cidr_block:       "10.0.0.0/16",
           instance_tenancy: "default",
         )
-        new(find(response[:vpc][:vpc_id]))
+        id = response[:vpc][:vpc_id]
+        new(find id)
       end
     end
   end

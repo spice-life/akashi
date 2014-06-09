@@ -15,7 +15,8 @@ module Akashi
               availability_zone: availability_zone,
               cidr_block:        next_cidr_block(vpc: vpc).to_s + "/#{cidr}",
             )
-            new(find(response[:subnet][:subnet_id]))
+            id = response[:subnet][:subnet_id]
+            new(find id)
           end
 
           def next_cidr_block(vpc:)
