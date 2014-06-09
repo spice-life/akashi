@@ -17,7 +17,10 @@ module Akashi
         subnets[name] = []
         klass = Akashi::VPC::Subnet.const_get(name.camelize)
         role["subnets"].each do |subnet|
-          subnets[name] << klass.create(availability_zone: subnet["availability_zone"])
+          subnets[name] << klass.create(
+            vpc:               vpc,
+            availability_zone: subnet["availability_zone"],
+          )
         end
       end
 
