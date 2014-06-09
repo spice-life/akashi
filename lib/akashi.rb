@@ -24,7 +24,8 @@ module Akashi
         end
       end
 
-      route_table = Akashi::Vpc::RouteTable.where(vpc: vpc).first
+      route_table      = Akashi::Vpc::RouteTable.find_by(vpc_id: vpc.id)
+      route_table.name = Akashi.name
       route_table.create_route(gateway: internet_gateway)
       roles do |name, role|
         if !!role["internet_connection"]

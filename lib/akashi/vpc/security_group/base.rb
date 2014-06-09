@@ -4,7 +4,7 @@ module Akashi
       class Base < Akashi::Vpc::SecurityGroup
         class << self
           def all
-            super.select { |security_group| security_group.name.end_with?(name_suffix) }
+            super.select { |security_group| security_group.name.end_with?("-#{name_suffix}") }
           end
 
           def create(vpc:)
@@ -22,6 +22,7 @@ module Akashi
                   *ip_permission[:sources],
                 )
               end
+              instance.name = name
             end
           end
 

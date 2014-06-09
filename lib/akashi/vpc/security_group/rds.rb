@@ -16,7 +16,7 @@ module Akashi
           end
 
           def name_suffix
-            @name_suffix ||= "-rds"
+            @name_suffix ||= "rds"
           end
         end
       end

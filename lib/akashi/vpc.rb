@@ -17,8 +17,8 @@ module Akashi
           cidr_block:       "10.0.0.0/16",
           instance_tenancy: "default",
         )
-        id = response[:vpc][:vpc_id]
-        new(find id)
+        object = find(response[:vpc][:vpc_id])
+        new(object).tap { |instance| instance.name = Akashi.name }
       end
     end
   end

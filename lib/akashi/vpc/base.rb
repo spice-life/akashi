@@ -11,6 +11,10 @@ class Akashi
         @object = object
       end
 
+      def name=(new_value)
+        @object.add_tag("Name", value: new_value)
+      end
+
       class << self
         def all
           collection = Akashi::Aws.ec2.send(demodulize.underscore.pluralize)

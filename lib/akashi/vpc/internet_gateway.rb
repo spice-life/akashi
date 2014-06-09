@@ -8,8 +8,8 @@ module Akashi
       class << self
         def create
           response = Akashi::Aws.ec2.client.create_internet_gateway
-          id = response[:internet_gateway][:internet_gateway_id]
-          new(find id)
+          object = find(response[:internet_gateway][:internet_gateway_id])
+          new(object).tap { |instance| instance.name = Akashi.name }
         end
       end
     end
