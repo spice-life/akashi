@@ -59,7 +59,7 @@ module Akashi
       fail "Not implemented"
     end
 
-    def name_tag
+    def name
       "#{application}-#{environment}"
     end
 
