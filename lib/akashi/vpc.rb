@@ -1,3 +1,7 @@
+require "akashi/vpc/base"
+require "akashi/vpc/internet_gateway"
+require "akashi/vpc/subnet"
+
 module Akashi
   class VPC < Akashi::VPC::Base
     class << self
