@@ -4,8 +4,8 @@ module Akashi
   module Aws
     module_function
 
-    def config=(new_val)
-      ::AWS.config(new_val)
+    def config=(new_value)
+      ::AWS.config(new_value)
       services.each { |service| instance_variable_set(:"@#{service}", nil) }
     end
 
