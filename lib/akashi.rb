@@ -15,7 +15,7 @@ module Akashi
       subnets = {}
       roles do |name, role|
         subnets[name] = []
-        klass = Akashi::Vpc::Subnet.const_get(name.camelize)
+        klass = "Akashi::Vpc::Subnet::#{name.camelize}".constantize
         role["subnets"].each do |subnet|
           subnets[name] << klass.create(
             vpc:               vpc,
@@ -34,7 +34,7 @@ module Akashi
 
       security_group = {}
       roles do |name, role|
-        klass = Akashi::Vpc::SecutiryGroup.const_get(name.camelize)
+        klass = "Akashi::Vpc::SecutiryGroup::#{name.camelize}".constantize
         security_group[name] = klass.create(vpc: vpc)
       end
 
