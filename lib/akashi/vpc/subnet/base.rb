@@ -39,6 +39,7 @@ module Akashi
 
           # netmask_binary #=> "11111111111111111111111100000000"
           # netmask        #=> IPAddr.new(4294967040, Socket::AF_INET)
+          # netmask.to_s   #=> "255.255.255.0"
           def netmask
             @netmask ||= IPAddr.new("0b#{netmask_binary}".oct, Socket::AF_INET)
           end
