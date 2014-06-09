@@ -5,6 +5,8 @@ require "akashi/vpc/subnet"
 
 module Akashi
   class Vpc < Akashi::Vpc::Base
+    def_delegators :@object, :cidr_block, :instance_tenancy, :state
+
     def internet_gateway=(internet_gateway)
       @object.internet_gateway = internet_gateway.id
     end
