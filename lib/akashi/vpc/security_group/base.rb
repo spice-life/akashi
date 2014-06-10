@@ -14,6 +14,7 @@ module Akashi
               description: name,
             )
             id = response[:group_id]
+
             new(id).tap do |instance|
               ingress_ip_permissions.each do |ip_permission|
                 instance.authorize_ingress(

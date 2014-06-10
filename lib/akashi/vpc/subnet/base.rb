@@ -16,6 +16,7 @@ module Akashi
               cidr_block:        next_cidr_block(vpc: vpc).to_s + "/#{cidr}",
             )
             id = response[:subnet][:subnet_id]
+
             new(id).tap do |instance|
               instance.name = name
               puts "Created #{id}"
