@@ -1,6 +1,10 @@
 module Akashi
   class Vpc
     class RouteTable < Akashi::Vpc::Base
+      def vpc_id
+        @object.vpc.id
+      end
+
       def create_route(internet_gateway:)
         @object.create_route(
           gateway_id:             internet_gateway.id,
