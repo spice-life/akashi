@@ -30,7 +30,7 @@ module Akashi
             id = response[:subnet][:subnet_id]
 
             new(id).tap do |instance|
-              instance.name = name
+              instance.name = name(vpc: vpc)
               puts "Created a Subnet (#{id})."
             end
           end
@@ -75,8 +75,8 @@ module Akashi
             @cidr ||= 24
           end
 
-          def name
-            "#{Akashi.name}-#{name_suffix}-#{next_number}"
+          def name(vpc:)
+            "#{Akashi.name}-#{name_suffix}-#{next_number(vpc: vpc)}"
           end
 
           def object_class
