@@ -35,8 +35,8 @@ module Akashi
             end
           end
 
-          def next_number(vpc:)
-            "%02d" % (where(vpc_id: vpc.id).count + 1)
+          def current_number(vpc:)
+            "%02d" % where(vpc_id: vpc.id).count
           end
 
           def next_cidr_block(vpc:)
@@ -76,7 +76,7 @@ module Akashi
           end
 
           def name(vpc:)
-            "#{Akashi.name}-#{name_suffix}-#{next_number(vpc: vpc)}"
+            "#{Akashi.name}-#{name_suffix}-#{current_number(vpc: vpc)}"
           end
 
           def object_class
