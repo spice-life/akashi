@@ -6,10 +6,7 @@ module Akashi
       end
 
       def create_route(internet_gateway:)
-        @object.create_route(
-          gateway_id:             internet_gateway.id,
-          destination_cidr_block: "0.0.0.0/0",
-        )
+        @object.create_route("0.0.0.0/0", internet_gateway: internet_gateway.id)
         puts "Created a route to an InternetGateway (#{internet_gateway.id}) to a VPC (#{id})."
       end
     end
