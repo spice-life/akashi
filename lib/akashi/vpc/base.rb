@@ -12,7 +12,7 @@ class Akashi
         end
 
         def base_class
-          @base_class ||= :":AWS::EC2::#{demodulize}".constantize
+          @base_class ||= "::AWS::EC2::#{demodulize}".constantize
         end
       end
     end
