@@ -17,7 +17,7 @@ action, application, environment = ARGV
 
 config_path = File.expand_path("../config", __dir__)
 
-Akashi::AWS.config = Yamler.load(File.join(config_path, "aws.yml"))
+Akashi::Aws.config = Yamler.load(File.join(config_path, "aws.yml"))
 
 Akashi.application = application
 Akashi.environment = environment
