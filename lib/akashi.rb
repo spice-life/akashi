@@ -2,6 +2,8 @@ require "openssl"
 require "active_support/core_ext"
 require "hashie/mash"
 require "akashi/aws"
+require "akashi/base"
+require "akashi/vpc"
 
 module Akashi
   class << self
