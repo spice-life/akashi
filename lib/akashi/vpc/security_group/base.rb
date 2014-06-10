@@ -33,6 +33,10 @@ module Akashi
           def name
             "#{Akashi.name}-#{name_suffix}"
           end
+
+          def object_class
+            @object_class ||= "SecurityGroup"
+          end
         end
       end
     end

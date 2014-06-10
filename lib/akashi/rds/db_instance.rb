@@ -33,8 +33,8 @@ module Akashi
           [*0..9, *"a".."z", *"A".."Z"].sample(length).join
         end
 
-        def base_class
-          @base_class ||= ::AWS::RDS::DBInstance
+        def object_class
+          @object_class ||= "DBInstance"
         end
       end
     end

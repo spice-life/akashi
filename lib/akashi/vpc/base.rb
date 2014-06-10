@@ -6,13 +6,8 @@ module Akashi
       end
 
       class << self
-        def all
-          collection = Akashi::Aws.ec2.send(demodulize.underscore.pluralize)
-          collection.map { |object| new(object.id) }
-        end
-
-        def base_class
-          @base_class ||= "::AWS::EC2::#{demodulize}".constantize
+        def service_class
+          @service_class ||= "EC2"
         end
       end
     end

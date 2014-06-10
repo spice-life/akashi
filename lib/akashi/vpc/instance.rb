@@ -22,8 +22,8 @@ module Akashi
           end
         end
 
-        def base_class
-          @base_class ||= ::AWS::EC2::VPC
+        def object_class
+          @object_class ||= "VPC"
         end
       end
     end

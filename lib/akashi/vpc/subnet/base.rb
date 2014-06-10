@@ -73,6 +73,10 @@ module Akashi
           def name
             "#{Akashi.name}-#{name_suffix}-#{next_number}"
           end
+
+          def object_class
+            @object_class ||= "Subnet"
+          end
         end
       end
     end
