@@ -1,4 +1,4 @@
-class Akashi
+module Akashi
   class Vpc
     class Base < Akashi::Base
       def name=(new_value)
