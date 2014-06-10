@@ -26,7 +26,9 @@ module Akashi
           )
           id = response[:db_instance_identifier]
 
-          puts "Created a RDS (#{id}). Password is \"#{password}\"."
+          new(id).tap do |instance|
+            puts "Created a RDS (#{id}). Password is \"#{password}\"."
+          end
         end
 
         def random_password(length)
