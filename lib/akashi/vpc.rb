@@ -6,8 +6,6 @@ require "akashi/vpc/subnet"
 
 module Akashi
   class Vpc < Akashi::Vpc::Base
-    def_delegators :@object, :cidr_block, :instance_tenancy, :state
-
     def internet_gateway=(internet_gateway)
       @object.internet_gateway = internet_gateway.id
       puts "Attached an InternetGateway (#{internet_gateway.id}) to a VPC (#{id})."
@@ -27,8 +25,16 @@ module Akashi
         end
       end
 
-      def klass
-        @klass ||= ::AWS::EC2::VPC
+      def base_class
+        @base_class ||= ::AWS::EC2::VPC
+      end
+
+      def attributes
+        @attributes ||= [
+          :cidr_block,
+          :instance_tenancy,
+          :state,
+        ]
       end
     end
   end

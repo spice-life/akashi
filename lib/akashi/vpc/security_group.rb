@@ -7,7 +7,16 @@ require "akashi/vpc/security_group/web_server"
 module Akashi
   class Vpc
     class SecurityGroup < Akashi::Vpc::Base
-      def_delegators :@object, :description, :name, :vpc_id, :authorize_ingress
+      class << self
+        def attributes
+          @attributes ||= [
+            :description,
+            :name,
+            :vpc_id,
+            :authorize_ingress,
+          ]
+        end
+      end
     end
   end
 end
