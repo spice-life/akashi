@@ -18,8 +18,15 @@ module Akashi
           cidr_block:       "10.0.0.0/16",
           instance_tenancy: "default",
         )
-        object = find(response[:vpc][:vpc_id])
-        new(object).tap { |instance| instance.name = Akashi.name }
+        id = response[:vpc][:vpc_id]
+
+        new(id).tap do |instance|
+          instance.name = Akashi.name
+        end
+      end
+
+      def klass
+        @klass ||= ::AWS::EC2::VPC
       end
     end
   end

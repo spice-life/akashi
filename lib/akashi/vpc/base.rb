@@ -7,8 +7,8 @@ class Akashi
 
       def_delegators :@object, :id
 
-      def initialize(object)
-        @object = object
+      def initialize(id)
+        @object = self.class.klass.new(id)
       end
 
       def name=(new_value)
@@ -37,6 +37,10 @@ class Akashi
           instances = where(conditions)
           fail "#{id} does not exist" if instances.empty?
           instances.first
+        end
+
+        def klass
+          @klass ||= :":AWS::EC2::#{demodulize}".constantize
         end
       end
     end

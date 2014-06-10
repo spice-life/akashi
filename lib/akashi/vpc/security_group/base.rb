@@ -13,8 +13,8 @@ module Akashi
               group_name:  name,
               description: name,
             )
-            object = find(response[:group_id])
-            new(object).tap do |instance|
+            id = response[:group_id]
+            new(id).tap do |instance|
               ingress_ip_permissions.each do |ip_permission|
                 instance.authorize_ingress(
                   ip_permission[:protocol],
