@@ -1,10 +1,12 @@
 require "openssl"
 require "active_support/core_ext"
+require "hashie/mash"
 require "akashi/aws"
 
 module Akashi
   class << self
-    attr_accessor :application, :environment, :manifest
+    attr_accessor :application, :environment
+    attr_reader   :manifest
 
     def build
       vpc = Akashi::Vpc.create
@@ -16,10 +18,10 @@ module Akashi
       roles do |name, role|
         subnets[name] = []
         klass = "Akashi::Vpc::Subnet::#{name.camelize}".constantize
-        role["subnets"].each do |subnet|
+        role.subnets.each do |subnet|
           subnets[name] << klass.create(
             vpc:               vpc,
-            availability_zone: subnet["availability_zone"],
+            availability_zone: subnet.availability_zone,
           )
         end
       end
@@ -28,7 +30,7 @@ module Akashi
       route_table.name = Akashi.name
       route_table.create_route(internet_gateway: internet_gateway)
       roles do |name, role|
-        if !!role["internet_connection"]
+        if !!role.internet_connection
           subnets[name].each { |subnet| subnet.route_table = route_table }
         end
       end
@@ -43,8 +45,8 @@ module Akashi
       Akashi::Rds.create(security_group: security_group[:rds])
 
       roles do |name, role|
-        role["subnets"].each do |subnet|
-          subnet["instances"].each { |instance| Akashi::Ec2.create(instance) }
+        role.subnets.each do |subnet|
+          subnet.instances.each { |instance| Akashi::Ec2.create(instance) }
         end
       end
 
@@ -60,6 +62,10 @@ module Akashi
       fail "Not implemented"
     end
 
+    def manifest=(new_value)
+      @manifest = Hashie::Mash.new(new_value)
+    end
+
     def name
       "#{application}-#{environment}"
     end
@@ -70,17 +76,17 @@ module Akashi
 
     def private_key
       unless !!@private_key
-        private_key_path = manifest["elb"]["ssl_certificate"]["private_key_path"]
+        private_key_path = manifest.elb.ssl_certificate.private_key_path
         @private_key = OpenSSL::PKey::RSA.new(File.read(private_key_path))
       end
       @private_key
     end
 
     def roles
-      return manifest["role"] unless block_given?
+      return manifest.role unless block_given?
 
       role_names.each do |name|
-        yield name, manifest["role"][name.to_s]
+        yield name, manifest.role.send(name)
       end
     end
 
