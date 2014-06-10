@@ -9,7 +9,7 @@ module Akashi
           password = random_password(10)
 
           response = Akashi::Aws.rds.client.create_db_instance(
-            db_name:                    Akashi.name,
+            db_name:                    Akashi.name(separator: "_"),
             db_instance_identifier:     Akashi.name,
             allocated_storage:          Akashi.manifest.rds.allocated_storage,
             db_instance_class:          Akashi.manifest.rds.instance_class,
