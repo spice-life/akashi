@@ -40,7 +40,12 @@ module Akashi
           end
 
           def next_cidr_block(vpc:)
-            IPAddr.new(latest_cidr_block(vpc: vpc).to_i + step, Socket::AF_INET)
+            _latest_cidr_block = latest_cidr_block(vpc: vpc)
+
+            IPAddr.new(
+              _latest_cidr_block ? _latest_cidr_block.to_i + step : base_cidr_block.to_s,
+              Socket::AF_INET,
+            )
           end
 
           def latest_cidr_block(vpc:)
