@@ -18,7 +18,7 @@ module Akashi
 
         class << self
           def all
-            super.select { |subnet| cidr_block.include?(subnet.cidr_block) }
+            super.select { |subnet| base_cidr_block.include?(subnet.cidr_block) }
           end
 
           def create(vpc:, availability_zone:)
