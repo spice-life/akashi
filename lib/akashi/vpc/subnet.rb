@@ -7,8 +7,8 @@ require "akashi/vpc/subnet/web_server"
 module Akashi
   class Vpc
     class Subnet < Akashi::Vpc::Base
-      def_delegators :@object, :availability_zone_name, :available_ip_address_count,
-                               :cidr_block, :state, :vpc_id
+      def_delegators :@object, :availability_zone_name,
+                               :available_ip_address_count, :state, :vpc_id
 
       def cidr_block
         IPAddr.new(@object.cidr_block)
