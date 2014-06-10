@@ -18,7 +18,7 @@ module Akashi
             master_user_password:       password,
             multi_az:                   !!Akashi.manifest.rds.multi_az,
             availability_zone:          Akashi.manifest.rds.availability_zone,
-            db_subnet_group_nmae:       Akashi.name,
+            db_subnet_group_name:       Akashi.name,
             engine_version:             Akashi.manifest.rds.engine_version,
             auto_minor_version_upgrade: true,
             publicly_accessible:        false,
