@@ -11,6 +11,10 @@ module Akashi
     attr_accessor :application, :environment
     attr_reader   :manifest
 
+    def manifest=(new_value)
+      @manifest = Hashie::Mash.new(new_value)
+    end
+
     def build
       vpc = Akashi::Vpc::Instance.create
 
@@ -65,16 +69,9 @@ module Akashi
       fail "Not implemented"
     end
 
-    def manifest=(new_value)
-      @manifest = Hashie::Mash.new(new_value)
-    end
-
-    def name
-      "#{application}-#{environment}"
-    end
-
-    def file_name
-      "#{application}_#{environment}"
+    def name(separator: "-")
+      fail "Invalid configurations" unless (!!application && !!environment)
+      application + separator + environment
     end
 
     def private_key
