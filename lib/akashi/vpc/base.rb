@@ -4,8 +4,9 @@ class Akashi
   class Vpc
     class Base
       extend Fowardable
-
       def_delegators :@object, :id
+
+      private_class_method :new
 
       def initialize(id)
         @object = self.class.klass.new(id)
