@@ -40,7 +40,7 @@ module Akashi
 
       security_group = {}
       roles do |name, role|
-        klass = "Akashi::Vpc::SecutiryGroup::#{name.to_s.camelize}".constantize
+        klass = "Akashi::Vpc::SecurityGroup::#{name.to_s.camelize}".constantize
         security_group[name] = klass.create(vpc: vpc)
       end
 
