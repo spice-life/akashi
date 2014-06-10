@@ -12,7 +12,7 @@ module Akashi
 
           new(id).tap do |instance|
             instance.name = Akashi.name
-            puts "Created #{id}"
+            puts "Created an InternetGateway (#{id})."
           end
         end
       end

@@ -10,7 +10,7 @@ module Akashi
 
     def internet_gateway=(internet_gateway)
       @object.internet_gateway = internet_gateway.id
-      puts "Attached #{internet_gateway.id} to #{id}"
+      puts "Attached an InternetGateway (#{internet_gateway.id}) to a VPC (#{id})."
     end
 
     class << self
@@ -23,7 +23,7 @@ module Akashi
 
         new(id).tap do |instance|
           instance.name = Akashi.name
-          puts "Created #{id}"
+          puts "Created a VPC (#{id})."
         end
       end
 

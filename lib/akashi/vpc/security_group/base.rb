@@ -24,7 +24,7 @@ module Akashi
                 )
               end
               instance.name = name
-              puts "Created #{id}"
+              puts "Created a SecurityGroup (#{id})."
             end
           end
 

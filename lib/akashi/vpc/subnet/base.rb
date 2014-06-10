@@ -19,7 +19,7 @@ module Akashi
 
             new(id).tap do |instance|
               instance.name = name
-              puts "Created #{id}"
+              puts "Created a Subnet (#{id})."
             end
           end
 
