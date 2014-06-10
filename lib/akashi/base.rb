@@ -3,7 +3,7 @@ require "forwardable"
 module Akashi
   class Base
     extend Forwardable
-    def_delegators :@object, :id, *attributes
+    def_delegators :@object, :id
 
     private_class_method :new
 
