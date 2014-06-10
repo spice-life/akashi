@@ -3,6 +3,7 @@ require "active_support/core_ext"
 require "hashie/mash"
 require "akashi/aws"
 require "akashi/base"
+require "akashi/rds"
 require "akashi/vpc"
 
 module Akashi
@@ -44,7 +45,7 @@ module Akashi
       end
 
       Akashi::Rds::SubnetGroup.create(subnets: subnets[:rds])
-      Akashi::Rds.create(security_group: security_group[:rds])
+      Akashi::Rds::DbInstance.create(security_group: security_group[:rds])
 
       roles do |name, role|
         role.subnets.each do |subnet|
