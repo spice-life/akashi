@@ -22,36 +22,36 @@ module Akashi
       vpc.internet_gateway = internet_gateway
 
       subnets = {}
-      roles do |name, role|
-        subnets[name] = []
-        klass = "Akashi::Vpc::Subnet::#{name.to_s.camelize}".constantize
+      roles do |role_name, role|
+        subnets[role_name] = []
+        klass = "Akashi::Vpc::Subnet::#{role_name.to_s.camelize}".constantize
         role.subnets.each do |subnet|
-          subnets[name] << klass.create(
+          subnets[role_name] << klass.create(
             vpc:               vpc,
             availability_zone: subnet.availability_zone,
           )
         end
       end
 
-      route_table      = Akashi::Vpc::RouteTable.find_by(vpc_id: vpc.id)
+      route_table = Akashi::Vpc::RouteTable.find_by(vpc_id: vpc.id)
       route_table.name = Akashi.name
       route_table.create_route(internet_gateway: internet_gateway)
-      roles do |name, role|
+      roles do |role_name, role|
         if !!role.internet_connection
-          subnets[name].each { |subnet| subnet.route_table = route_table }
+          subnets[role_name].each { |subnet| subnet.route_table = route_table }
         end
       end
 
       security_group = {}
-      roles do |name, role|
-        klass = "Akashi::Vpc::SecurityGroup::#{name.to_s.camelize}".constantize
-        security_group[name] = klass.create(vpc: vpc)
+      roles do |role_name, role|
+        klass = "Akashi::Vpc::SecurityGroup::#{role_name.to_s.camelize}".constantize
+        security_group[role_name] = klass.create(vpc: vpc)
       end
 
       Akashi::Rds::SubnetGroup.create(subnets: subnets[:rds])
       Akashi::Rds::DbInstance.create(security_group: security_group[:rds])
 
-      roles do |name, role|
+      roles do |role_name, role|
         role.subnets.each do |subnet|
           subnet.instances.each { |instance| Akashi::Ec2.create(instance) }
         end
@@ -85,8 +85,8 @@ module Akashi
     def roles
       return manifest.role unless block_given?
 
-      role_names.each do |name|
-        yield name, manifest.role.send(name)
+      role_names.each do |role_name|
+        yield role_name, manifest.role.send(role_name)
       end
     end
 
