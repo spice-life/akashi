@@ -16,6 +16,7 @@ module Akashi
 
       def route_table=(route_table)
         @object.route_table = route_table.id
+        puts "#{id} associated with #{route_table.id}"
       end
     end
   end

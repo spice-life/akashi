@@ -18,6 +18,7 @@ module Akashi
             id = response[:subnet][:subnet_id]
             new(id).tap do |instance|
               instance.name = name
+              puts "Created #{id}"
             end
           end
 

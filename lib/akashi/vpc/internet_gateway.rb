@@ -12,6 +12,7 @@ module Akashi
 
           new(id).tap do |instance|
             instance.name = Akashi.name
+            puts "Created #{id}"
           end
         end
       end

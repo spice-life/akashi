@@ -23,6 +23,7 @@ module Akashi
                 )
               end
               instance.name = name
+              puts "Created #{id}"
             end
           end
 
