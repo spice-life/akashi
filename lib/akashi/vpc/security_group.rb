@@ -6,8 +6,8 @@ require "akashi/vpc/security_group/web_server"
 
 module Akashi
   class Vpc
-    class SecurityGroup < Akashi::Vpc::Base
-      def_delegatros :@object, :description, :name, :vpc_id, :authorize_ingress
+    # Not implemented
+    class SecurityGroup
     end
   end
 end

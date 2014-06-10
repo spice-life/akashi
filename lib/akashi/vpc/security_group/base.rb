@@ -1,7 +1,9 @@
 module Akashi
   class Vpc
     class SecurityGroup
-      class Base < Akashi::Vpc::SecurityGroup
+      class Base < Akashi::Vpc::Base
+        def_delegators :@object, :description, :name, :vpc_id, :authorize_ingress
+
         class << self
           def all
             super.select { |security_group| security_group.name.end_with?("-#{name_suffix}") }

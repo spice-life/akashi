@@ -6,18 +6,8 @@ require "akashi/vpc/subnet/web_server"
 
 module Akashi
   class Vpc
-    class Subnet < Akashi::Vpc::Base
-      def_delegatros :@object, :availability_zone_name,
-                               :available_ip_address_count, :state, :vpc_id
-
-      def cidr_block
-        IPAddr.new(@object.cidr_block)
-      end
-
-      def route_table=(route_table)
-        @object.route_table = route_table.id
-        puts "A VPC (#{id}) associated with a RouteTable (#{route_table.id})."
-      end
+    # Not implemented
+    class Subnet
     end
   end
 end

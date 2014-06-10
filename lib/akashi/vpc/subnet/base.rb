@@ -3,7 +3,19 @@ require "ipaddr"
 module Akashi
   class Vpc
     class Subnet
-      class Base < Akashi::Vpc::Subnet
+      class Base < Akashi::Vpc::Base
+        def_delegators :@object, :availability_zone_name,
+                                 :available_ip_address_count, :state, :vpc_id
+
+        def cidr_block
+          IPAddr.new(@object.cidr_block)
+        end
+
+        def route_table=(route_table)
+          @object.route_table = route_table.id
+          puts "A VPC (#{id}) associated with a RouteTable (#{route_table.id})."
+        end
+
         class << self
           def all
             super.select { |subnet| cidr_block.include?(subnet.cidr_block) }

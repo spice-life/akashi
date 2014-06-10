@@ -11,7 +11,7 @@ module Akashi
     attr_reader   :manifest
 
     def build
-      vpc = Akashi::Vpc.create
+      vpc = Akashi::Vpc::Instance.create
 
       internet_gateway = Akashi::Vpc::InternetGateway.create
       vpc.internet_gateway = internet_gateway
