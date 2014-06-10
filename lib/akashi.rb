@@ -26,7 +26,7 @@ module Akashi
 
       route_table      = Akashi::Vpc::RouteTable.find_by(vpc_id: vpc.id)
       route_table.name = Akashi.name
-      route_table.create_route(gateway: internet_gateway)
+      route_table.create_route(internet_gateway: internet_gateway)
       roles do |name, role|
         if !!role["internet_connection"]
           subnets[name].each { |subnet| subnet.route_table = route_table }
