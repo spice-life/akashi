@@ -15,9 +15,8 @@ module Akashi
               group_name:  name,
               description: name,
             )
-            id = response[:group_id]
 
-            new(id).tap do |instance|
+            new(response[:group_id]).tap do |instance|
               ingress_ip_permissions.each do |ip_permission|
                 instance.authorize_ingress(
                   ip_permission[:protocol],
@@ -26,7 +25,7 @@ module Akashi
                 )
               end
               instance.name = name
-              puts "Created a SecurityGroup (#{id})."
+              puts "Created a SecurityGroup (#{instance.id})."
             end
           end
 

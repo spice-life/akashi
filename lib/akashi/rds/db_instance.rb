@@ -24,10 +24,9 @@ module Akashi
             auto_minor_version_upgrade: true,
             publicly_accessible:        false,
           )
-          id = response[:db_instance_identifier]
 
-          new(id).tap do |instance|
-            puts "Created a RDS (#{id}). Password is \"#{password}\"."
+          new(response[:db_instance_identifier]).tap do |instance|
+            puts "Created a RDS (#{instance.id}). Password is \"#{password}\"."
           end
         end
 

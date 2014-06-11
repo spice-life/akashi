@@ -8,11 +8,10 @@ module Akashi
       class << self
         def create
           response = Akashi::Aws.ec2.client.create_internet_gateway
-          id       = response[:internet_gateway][:internet_gateway_id]
 
-          new(id).tap do |instance|
+          new(response[:internet_gateway][:internet_gateway_id]).tap do |instance|
             instance.name = Akashi.name
-            puts "Created an InternetGateway (#{id})."
+            puts "Created an InternetGateway (#{instance.id})."
           end
         end
       end

@@ -27,11 +27,10 @@ module Akashi
               availability_zone: availability_zone,
               cidr_block:        next_cidr_block(vpc: vpc).to_s + "/#{cidr}",
             )
-            id = response[:subnet][:subnet_id]
 
-            new(id).tap do |instance|
+            new(response[:subnet][:subnet_id]).tap do |instance|
               instance.name = name(vpc: vpc)
-              puts "Created a Subnet (#{id})."
+              puts "Created a Subnet (#{instance.id})."
             end
           end
 

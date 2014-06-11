@@ -9,10 +9,9 @@ module Akashi
             key_name:            Akashi.name,
             public_key_material: Akashi.public_key,
           )
-          id = response[:key_name]
 
-          new(id).tap do |instance|
-            puts "Created a KeyPair (#{id})."
+          new(response[:key_name]).tap do |instance|
+            puts "Created a KeyPair (#{instance.id})."
           end
         end
       end
