@@ -3,6 +3,7 @@ require "active_support/core_ext"
 require "hashie/mash"
 require "akashi/aws"
 require "akashi/base"
+require "akashi/ec2"
 require "akashi/rds"
 require "akashi/vpc"
 
@@ -80,6 +81,10 @@ module Akashi
         @private_key = OpenSSL::PKey::RSA.new(_private_key)
       end
       @private_key
+    end
+
+    def public_key
+      @public_key ||= Base64.encode64(manifest.ec2.public_key)
     end
 
     def role_names
