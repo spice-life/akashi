@@ -53,7 +53,7 @@ module Akashi
 
       manifest.role.each do |role_name, role|
         role.subnets.each do |subnet|
-          subnet.instances.each { |instance| Akashi::Ec2.create(instance) }
+          subnet.instances.try(:each) { |instance| Akashi::Ec2.create(instance) }
         end
       end
 
