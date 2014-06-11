@@ -13,7 +13,7 @@ module Akashi
 
     def manifest=(new_value)
       @manifest = Hashie::Mash.new(new_value)
-      unless @manifest.role.all? { |role_name, role| role_names.include?(role_name.intern) }
+      unless @manifest.role.all? { |role_name, _| role_names.include?(role_name.intern) }
         fail "Unknown role exists"
       end
     end
