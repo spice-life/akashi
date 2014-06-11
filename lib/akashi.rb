@@ -76,8 +76,8 @@ module Akashi
 
     def private_key
       unless !!@private_key
-        private_key_path = manifest.elb.ssl_certificate.private_key_path
-        @private_key = OpenSSL::PKey::RSA.new(File.read(private_key_path))
+        _private_key = File.read(manifest.elb.ssl_certificate.private_key_path)
+        @private_key = OpenSSL::PKey::RSA.new(_private_key)
       end
       @private_key
     end
