@@ -25,36 +25,33 @@ module Akashi
       vpc.internet_gateway = internet_gateway
 
       subnets = {}
-      roles do |role_name, role|
-        subnets[role_name] = []
-        klass = "Akashi::Vpc::Subnet::#{role_name.to_s.camelize}".constantize
+      manifest.role.each do |role_name, role|
+        subnets[role_name.intern] = []
+        klass = "Akashi::Vpc::Subnet::#{role_name.camelize}".constantize
         role.subnets.each do |subnet|
-          subnets[role_name] << klass.create(
-            vpc:               vpc,
-            availability_zone: subnet.availability_zone,
-          )
+          subnets[role_name.intern] << klass.create(vpc: vpc, availability_zone: subnet.availability_zone)
         end
       end
 
-      route_table = Akashi::Vpc::RouteTable.find_by(vpc_id: vpc.id)
+      route_table      = Akashi::Vpc::RouteTable.find_by(vpc_id: vpc.id)
       route_table.name = Akashi.name
       route_table.create_route(internet_gateway: internet_gateway)
-      roles do |role_name, role|
+      manifest.role.each do |role_name, role|
         if !!role.internet_connection
-          subnets[role_name].each { |subnet| subnet.route_table = route_table }
+          subnets[role_name.intern].each { |subnet| subnet.route_table = route_table }
         end
       end
 
       security_group = {}
-      roles do |role_name, role|
-        klass = "Akashi::Vpc::SecurityGroup::#{role_name.to_s.camelize}".constantize
-        security_group[role_name] = klass.create(vpc: vpc)
+      manifest.role.each do |role_name, role|
+        klass = "Akashi::Vpc::SecurityGroup::#{role_name.camelize}".constantize
+        security_group[role_name.intern] = klass.create(vpc: vpc)
       end
 
       Akashi::Rds::SubnetGroup.create(subnets: subnets[:rds])
       Akashi::Rds::DbInstance.create(security_group: security_group[:rds])
 
-      roles do |role_name, role|
+      manifest.role.each do |role_name, role|
         role.subnets.each do |subnet|
           subnet.instances.each { |instance| Akashi::Ec2.create(instance) }
         end
@@ -83,14 +80,6 @@ module Akashi
         @private_key = OpenSSL::PKey::RSA.new(File.read(private_key_path))
       end
       @private_key
-    end
-
-    def roles
-      return manifest.role unless block_given?
-
-      role_names.each do |role_name|
-        yield role_name, manifest.role.send(role_name)
-      end
     end
 
     def role_names
