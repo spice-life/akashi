@@ -7,6 +7,7 @@ module Akashi
         @object.internet_gateway = internet_gateway.id
         puts "Attached an InternetGateway (#{internet_gateway.id}) to a VPC (#{id})."
       end
+      alias attach_internet_gateway internet_gateway=
 
       class << self
         def create
