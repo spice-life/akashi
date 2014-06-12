@@ -30,7 +30,7 @@ module Akashi
 
       def find_by(conditions = {})
         instances = where(conditions)
-        fail "#{id} does not exist" if instances.empty?
+        fail "#{conditions} does not exist" if instances.empty?
         instances.first
       end
 
