@@ -33,6 +33,10 @@ module Akashi
             "#{Akashi.name}-#{name_suffix}"
           end
 
+          def name_suffix
+            self.to_s.underscore.dasherize
+          end
+
           def object_class
             @object_class ||= "SecurityGroup"
           end

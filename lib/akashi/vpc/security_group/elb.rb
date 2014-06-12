@@ -11,10 +11,6 @@ module Akashi
               }
             ]
           end
-
-          def name_suffix
-            @name_suffix ||= "elb"
-          end
         end
       end
     end

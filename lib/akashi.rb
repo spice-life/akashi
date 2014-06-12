@@ -86,9 +86,9 @@ module Akashi
     def role_names
       @role_names ||= [
         :elb,
-        :ssh_gateway,
+        :gateway,
         :rds,
-        :web_server,
+        :web,
       ]
     end
   end
