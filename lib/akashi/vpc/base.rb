@@ -5,6 +5,10 @@ module Akashi
         @object.add_tag("Name", value: new_value)
       end
 
+      def name
+        @object.tags["Name"]
+      end
+
       class << self
         def service_class
           @service_class ||= "EC2"
