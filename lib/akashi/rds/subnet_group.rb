@@ -6,7 +6,7 @@ module Akashi
           response = Akashi::Aws.rds.client.create_db_subnet_group(
             db_subnet_group_name:        Akashi.name,
             db_subnet_group_description: Akashi.name,
-            subnet_ids:                  subnets.map(&:id)
+            subnet_ids:                  Array.wrap(subnets).map(&:id)
           )
           id = response[:db_subnet_group_name]
 
