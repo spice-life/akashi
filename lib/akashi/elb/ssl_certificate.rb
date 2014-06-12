@@ -23,7 +23,7 @@ module Akashi
           response = Akashi::Aws.iam.client.upload_server_certificate(options)
 
           new(response[:server_certificate_metadata][:server_certificate_name]).tap do |instance|
-            puts "Created a SSL Certificate (#{instance.name})."
+            puts "Created a SSL Certificate(#{instance.name})."
           end
         end
 

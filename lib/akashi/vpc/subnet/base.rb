@@ -17,7 +17,7 @@ module Akashi
 
         def route_table=(route_table)
           @object.route_table = route_table.id
-          puts "A Subnet (#{id}) associated with a RouteTable (#{route_table.id})."
+          puts "A Subnet(#{id}) associated with a RouteTable(#{route_table.id})."
         end
 
         class << self
@@ -35,7 +35,7 @@ module Akashi
             new(response[:subnet][:subnet_id]).tap do |instance|
               instance.name = name(vpc: vpc)
               puts <<-EOS
-Created a Subnet (#{instance.id}) whose role is "#{role}". Availability zone is "#{instance.availability_zone_name}".
+Created a Subnet(#{instance.id}) whose role is "#{role}". Availability zone is "#{instance.availability_zone_name}".
               EOS
             end
           end

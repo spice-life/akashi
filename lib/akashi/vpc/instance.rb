@@ -5,7 +5,7 @@ module Akashi
 
       def internet_gateway=(internet_gateway)
         @object.internet_gateway = internet_gateway.id
-        puts "Attached an InternetGateway (#{internet_gateway.id}) to a VPC (#{id})."
+        puts "Attached an InternetGateway(#{internet_gateway.id}) to a VPC(#{id})."
       end
       alias attach_internet_gateway internet_gateway=
 
@@ -20,7 +20,7 @@ module Akashi
             instance.name = Akashi.name
 
             route_table = Akashi::Vpc::RouteTable.find_by(vpc_id: instance.id)
-            puts "Created a VPC (#{instance.id}). RouteTable is \"#{route_table.id}\"."
+            puts "Created a VPC(#{instance.id}). RouteTable is \"#{route_table.id}\"."
           end
         end
 
