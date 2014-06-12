@@ -13,7 +13,7 @@ module Akashi
           )
 
           new(response[:key_name]).tap do |instance|
-            puts "Created a KeyPair(#{instance.id})."
+            puts "Created a KeyPair (#{instance.id})."
           end
         end
       end

@@ -26,7 +26,7 @@ module Akashi
           )
 
           new(response[:db_instance_identifier]).tap do |instance|
-            puts "Created a RDS(#{instance.id}). Password is \"#{password}\"."
+            puts "Created a RDS (#{instance.id}). Password is \"#{password}\"."
           end
         end
 

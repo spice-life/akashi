@@ -10,7 +10,7 @@ module Akashi
           )
           id = response[:db_subnet_group_name]
 
-          puts "Created a SubnetGroup(#{id})."
+          puts "Created a SubnetGroup (#{id})."
         end
       end
     end

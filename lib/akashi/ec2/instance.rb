@@ -30,7 +30,7 @@ module Akashi
 
           new(response.id).tap do |instance|
             instance.name = name
-            puts "Created an EC2 Instance(#{instance.id}) on a Subnet(#{subnet.id})."
+            puts "Created an EC2 Instance (#{instance.id}) on a Subnet (#{subnet.id})."
           end
         end
 

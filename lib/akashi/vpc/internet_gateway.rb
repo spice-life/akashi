@@ -11,7 +11,7 @@ module Akashi
 
           new(response[:internet_gateway][:internet_gateway_id]).tap do |instance|
             instance.name = Akashi.name
-            puts "Created an InternetGateway(#{instance.id})."
+            puts "Created an InternetGateway (#{instance.id})."
           end
         end
       end
