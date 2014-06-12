@@ -1,9 +1,9 @@
-require "openssl"
 require "active_support/core_ext"
 require "hashie/mash"
 require "akashi/aws"
 require "akashi/base"
 require "akashi/ec2"
+require "akashi/elb"
 require "akashi/rds"
 require "akashi/vpc"
 
@@ -81,14 +81,6 @@ module Akashi
     def name(separator: "-")
       fail "Invalid configurations" unless (!!application && !!environment)
       application + separator + environment
-    end
-
-    def private_key
-      unless !!@private_key
-        _private_key = File.read(manifest.elb.ssl_certificate.private_key_path)
-        @private_key = OpenSSL::PKey::RSA.new(_private_key)
-      end
-      @private_key
     end
 
     def klass(service, object, role = nil)
