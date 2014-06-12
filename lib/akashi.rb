@@ -29,7 +29,7 @@ module Akashi
       vpc.attach_internet_gateway(internet_gateway)
       route_table.create_route(internet_gateway: internet_gateway)
 
-      Akashi::Ec2::KeyPair.create(public_key: manifest.ec2.public_key)
+      Akashi::Ec2::KeyPair.create
 
       manifest.role.each do |role_name, role|
         subnets[role_name]   = []
