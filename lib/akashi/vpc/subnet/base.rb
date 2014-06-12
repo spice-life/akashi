@@ -83,7 +83,7 @@ module Akashi
           end
 
           def name_suffix
-            self.to_s.underscore.dasherize
+            self.to_s.demodulize.underscore.dasherize
           end
 
           def object_class
