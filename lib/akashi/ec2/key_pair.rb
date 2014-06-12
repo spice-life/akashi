@@ -6,7 +6,7 @@ module Akashi
       def_delegators :@object, :fingerprint, :name
 
       class << self
-        def create(public_key)
+        def create(public_key:)
           response = Akashi::Aws.ec2.client.import_key_pair(
             key_name:            Akashi.name,
             public_key_material: Base64.encode64(public_key)
