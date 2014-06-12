@@ -34,7 +34,7 @@ module Akashi
 
             new(response[:subnet][:subnet_id]).tap do |instance|
               instance.name = name(vpc: vpc)
-              puts "Created a Subnet (#{instance.id})."
+              puts "Created a Subnet (#{instance.id}) which role is \"#{role}\"."
             end
           end
 
@@ -79,10 +79,10 @@ module Akashi
           end
 
           def name(vpc:)
-            "#{Akashi.name}-#{name_suffix}-#{current_number(vpc: vpc)}"
+            "#{Akashi.name}-#{role}-#{current_number(vpc: vpc)}"
           end
 
-          def name_suffix
+          def role
             self.to_s.demodulize.underscore.dasherize
           end
 

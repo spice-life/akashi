@@ -7,7 +7,7 @@ module Akashi
 
       def create_route(internet_gateway:)
         @object.create_route("0.0.0.0/0", internet_gateway: internet_gateway.id)
-        puts "Created a route to an InternetGateway (#{internet_gateway.id}) to a VPC (#{id})."
+        puts "Created a Route to an InternetGateway (#{internet_gateway.id}) on a RouteTable (#{id})."
       end
     end
   end

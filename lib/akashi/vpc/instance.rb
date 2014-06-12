@@ -18,7 +18,9 @@ module Akashi
 
           new(response[:vpc][:vpc_id]).tap do |instance|
             instance.name = Akashi.name
-            puts "Created a VPC (#{instance.id})."
+
+            route_table = Akashi::Vpc::RouteTable.find_by(vpc_id: instance.id)
+            puts "Created a VPC (#{instance.id}). RouteTable is \"#{route_table.id}\"."
           end
         end
 

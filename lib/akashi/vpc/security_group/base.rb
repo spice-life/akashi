@@ -6,7 +6,7 @@ module Akashi
 
         class << self
           def all
-            super.select { |security_group| security_group.name.end_with?("-#{name_suffix}") }
+            super.select { |security_group| security_group.name.end_with?("-#{role}") }
           end
 
           def create(vpc:)
@@ -25,15 +25,15 @@ module Akashi
                 )
               end
               instance.name = name
-              puts "Created a SecurityGroup (#{instance.id})."
+              puts "Created a SecurityGroup (#{instance.id}) which role is \"#{role}\"."
             end
           end
 
           def name
-            "#{Akashi.name}-#{name_suffix}"
+            "#{Akashi.name}-#{role}"
           end
 
-          def name_suffix
+          def role
             self.to_s.demodulize.underscore.dasherize
           end
 
