@@ -34,7 +34,9 @@ module Akashi
 
             new(response[:subnet][:subnet_id]).tap do |instance|
               instance.name = name(vpc: vpc)
-              puts "Created a Subnet (#{instance.id}) which role is \"#{role}\"."
+              puts <<-EOS
+Created a Subnet (#{instance.id}) whose role is "#{role}". Availability zone is "#{instance.availability_zone_name}".
+              EOS
             end
           end
 
