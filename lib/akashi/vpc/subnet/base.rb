@@ -11,6 +11,10 @@ module Akashi
           IPAddr.new(@object.cidr_block)
         end
 
+        def number
+          name.slice(/(?<=-)\d{2}\Z/)
+        end
+
         def route_table=(route_table)
           @object.route_table = route_table.id
           puts "A Subnet (#{id}) associated with a RouteTable (#{route_table.id})."
