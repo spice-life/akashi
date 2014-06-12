@@ -83,10 +83,6 @@ module Akashi
       @private_key
     end
 
-    def public_key
-      @public_key ||= Base64.encode64(manifest.ec2.public_key)
-    end
-
     def role_names
       @role_names ||= [
         :elb,
