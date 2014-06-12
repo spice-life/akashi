@@ -29,6 +29,8 @@ module Akashi
       vpc.attach_internet_gateway(internet_gateway)
       route_table.create_route(internet_gateway: internet_gateway)
 
+      ssl_certificate = Akashi::Elb::SslCertificate.create
+
       Akashi::Ec2::KeyPair.create
 
       manifest.role.each do |role_name, role|
@@ -66,10 +68,9 @@ module Akashi
       Akashi::Rds::SubnetGroup.create(subnets: subnets[:rds])
       Akashi::Rds::DbInstance.create(security_group: security_group[:rds])
 
-      ssl_certificate = Akashi::Elb::SslCertificate.create
-      Akashi::Elb.create(
+      Akashi::Elb::LoadBalancer.create(
         security_group:  security_group[:elb],
-        subnet:          subnets[:elb],
+        subnets:         subnets[:elb],
         ssl_certificate: ssl_certificate,
       )
     end
