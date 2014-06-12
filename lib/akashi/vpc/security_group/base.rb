@@ -25,7 +25,7 @@ module Akashi
                 )
               end
               instance.name = name
-              puts "Created a SecurityGroup (#{instance.id}) which role is \"#{role}\"."
+              puts "Created a SecurityGroup (#{instance.id}) whose role is \"#{role}\"."
             end
           end
 
