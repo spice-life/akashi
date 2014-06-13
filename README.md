@@ -1,43 +1,40 @@
-# Akashi - Build infrastructure on VPC
+# Akashi
 
-## Introduction
-```
-$ bundle install --without development
-$ cp config/aws.yml.exapmle config/aws.yml
-$ vi config/aws.yml
-Describe credentials and region of AWS
-```
+Wrapping aws-sdk
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+    gem 'akashi'
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install akashi
 
 ## Usage
+
+``` ruby
+require "yaml"
+require "akashi"
+
+Akashi::Aws.config = YAML.load_file("aws.yml"))
+
+Akashi.application = application
+Akashi.environment = environment
+Akashi.manifest    = YAML.load_file("#{Akashi.name(separator: "_")}.yml")
+
+Akashi.send(action.intern)
 ```
-$ cp <path_to_private_key> private_keys // if required
-$ bundle exec bin/akashi <action> <application> <environment>
-action choose from build, destroy (destroy action not implemented yet)
-```
 
-## Configurations
-### VPC
-Cidr block is 10.0.0.0/16.
+## Contributing
 
-### Roles
-|Role|Cidr block
-|---|---|
-|ELB|10.0.0.0/19|
-|SSH Gateway|10.0.32.0/19|
-|RDS|10.0.64.0/19|
-|Web Server|10.0.96.0/19|
-
-#### Allowed input
-|Role|Protocol|Port|Source|
-|---|---|---|---|
-|ELB|TCP|443|0.0.0.0/0|
-|SSH Gateway|TCP|9922|0.0.0.0/0|
-||ICMP|-|0.0.0.0/0|
-|RDS|TCP|3306|10.0.96.0/19|
-|Web Server|TCP|80|10.0.0.0/19|
-||TCP|9922|10.0.32.0/19|
-||ICMP|-|10.0.32.0/19|
-
-### Subnets
-Cidr is 24. Create subnet from cidr block of role each availability zone.  
-Example of ELB: 10.0.0.0/24, 10.0.1.0/24, 10.0.2.0/24...
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request

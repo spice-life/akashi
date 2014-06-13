@@ -6,6 +6,7 @@ require "akashi/ec2"
 require "akashi/elb"
 require "akashi/rds"
 require "akashi/vpc"
+require "akashi/version"
 
 module Akashi
   class << self
