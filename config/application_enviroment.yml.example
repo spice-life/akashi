@@ -1,0 +1,43 @@
+ec2:
+  instances:
+    gateway: &instance_for_gateway
+      ami_id:
+      instance_class: m3.medium
+      allocated_storage: 8 # GB
+    web: &instance_for_web
+      ami_id:
+      instance_class: m3.medium
+      allocated_storage: 8 # GB
+  public_key:
+rds:
+  allocated_storage: 5 # GB
+  instance_class: db.t1.micro
+  multi_az: false
+  availability_zone: ap-northeast-1c
+  engine_version: 5.6.17
+elb:
+  ssl_certificate:
+    server_certificate:
+    private_key_path:
+  health_check:
+    target: HTTP:80/ping
+role:
+  elb:
+    internet_connection: true
+    subnets:
+      - availability_zone: ap-northeast-1c
+  gateway:
+    internet_connection: true
+    subnets:
+      - availability_zone: ap-northeast-1c
+        instance: *instance_for_gateway
+        number_of_instances: 1
+  rds:
+    subnets:
+      - availability_zone: ap-northeast-1b
+      - availability_zone: ap-northeast-1c
+  web:
+    subnets:
+      - availability_zone: ap-northeast-1c
+        instance: *instance_for_web
+        number_of_instances: 1
