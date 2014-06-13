@@ -22,7 +22,7 @@ Or install it yourself as:
 require "yaml"
 require "akashi"
 
-Akashi::Aws.config = YAML.load_file("aws.yml"))
+Akashi::Aws.config = YAML.load_file("aws.yml")
 
 Akashi.application = application
 Akashi.environment = environment
