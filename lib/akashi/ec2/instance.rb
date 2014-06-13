@@ -6,7 +6,7 @@ module Akashi
                                :key_name, :subnet_id, :vpc_id, :status, :statub_code
 
       class << self
-        def create(ami:, instance_class:, security_group:, subnet:, allocated_storage:, associate_public_ip_address: false)
+        def create(ami:, instance_class:, security_group:, subnet:, allocated_storage:)
           name = "#{subnet.name}-#{next_number(subnet: subnet)}"
 
           response = Akashi::Aws.ec2.instances.create(
@@ -15,7 +15,7 @@ module Akashi
             security_group_ids:          [ security_group.id ],
             subnet_id:                   subnet.id,
             instance_type:               instance_class,
-            associate_public_ip_address: !!associate_public_ip_address,
+            associate_public_ip_address: true,
             block_device_mappings:       [
               {
                 device_name:  ami.root_device_name,

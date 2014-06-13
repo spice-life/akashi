@@ -49,12 +49,11 @@ module Akashi
 
             (subnet.instance.number_of_instances || 1).times do
               Akashi::Ec2::Instance.create(
-                ami:                         ami,
-                instance_class:              subnet.instance.instance_class,
-                security_group:              security_group[role_name],
-                subnet:                      _subnet,
-                allocated_storage:           subnet.instance.allocated_storage,
-                associate_public_ip_address: !!role.internet_connection,
+                ami:               ami,
+                instance_class:    subnet.instance.instance_class,
+                security_group:    security_group[role_name],
+                subnet:            _subnet,
+                allocated_storage: subnet.instance.allocated_storage,
               )
             end
           end
