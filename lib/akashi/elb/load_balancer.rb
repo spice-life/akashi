@@ -25,7 +25,13 @@ module Akashi
                 instance_protocol:  "HTTP",
                 instance_port:      80,
                 ssl_certificate_id: ssl_certificate.arn,
-              }
+              },
+              {
+                protocol:           "HTTP",
+                load_balancer_port: 80,
+                instance_protocol:  "HTTP",
+                instance_port:      80,
+              },
             ],
           )
 
