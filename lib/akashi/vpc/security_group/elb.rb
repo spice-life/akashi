@@ -8,7 +8,11 @@ module Akashi
               {
                 protocol: :tcp,
                 port:     443,
-              }
+              },
+              {
+                protocol: :tcp,
+                port:     80,
+              },
             ]
           end
         end
