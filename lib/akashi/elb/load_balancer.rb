@@ -44,7 +44,7 @@ module Akashi
               unhealthy_threshold: 2,
               healthy_threshold:   2,
             )
-            puts "Created a LoadBalancer(#{instance.name})."
+            puts "Created a LoadBalancer (#{instance.name})."
           end
         end
       end
