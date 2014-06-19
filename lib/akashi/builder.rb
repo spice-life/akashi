@@ -70,6 +70,11 @@ module Akashi
           end
         end
       end
+
+      ec2_instances[:gateway].each do |ec2_instance|
+        eip = Akashi::Vpc::ElasticIp.create
+        eip.associate(instance: ec2_instance)
+      end
     end
 
     def create_subnet_group
