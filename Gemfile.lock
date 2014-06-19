@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    akashi (0.0.1)
+    akashi (0.0.2)
       activesupport
       aws-sdk
       hashie
