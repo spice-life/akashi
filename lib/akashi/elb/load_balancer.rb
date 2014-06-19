@@ -8,6 +8,10 @@ module Akashi
           modify_load_balancer_attributes(options.merge({ load_balancer_name: name }))
       end
 
+      def register_instances(instances)
+        @object.instances.register(Array.wrap(instances).map(&:id))
+      end
+
       class << self
         def create(security_group:, subnets:, ssl_certificate:)
           Akashi::Aws.elb.client.create_load_balancer(

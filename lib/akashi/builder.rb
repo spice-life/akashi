@@ -90,6 +90,7 @@ module Akashi
         subnets:         subnets[:elb],
         ssl_certificate: @ssl_certificate,
       )
+      @load_balancer.register_instances(ec2_instances[:web])
     end
 
     def ec2_instances
