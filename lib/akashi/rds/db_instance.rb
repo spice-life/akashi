@@ -6,7 +6,7 @@ module Akashi
 
       class << self
         def create(security_group:)
-          password = random_password(10)
+          password = Akashi.manifest.rds.password || random_password(10)
 
           response = Akashi::Aws.rds.client.create_db_instance(
             db_name:                    Akashi.name(separator: "_"),
