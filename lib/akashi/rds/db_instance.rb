@@ -7,8 +7,7 @@ module Akashi
       class << self
         def create(security_group:)
           password = Akashi.manifest.rds.password || random_password(10)
-
-          response = Akashi::Aws.rds.client.create_db_instance(
+          options  = {
             db_name:                    Akashi.name(separator: "_"),
             db_instance_identifier:     Akashi.name,
             allocated_storage:          Akashi.manifest.rds.allocated_storage,
@@ -23,7 +22,12 @@ module Akashi
             engine_version:             Akashi.manifest.rds.engine_version,
             auto_minor_version_upgrade: true,
             publicly_accessible:        false,
-          )
+          }
+          if !!Akashi.manifest.rds.parameter_group_name
+            options.merge!(db_parameter_group_name: Akashi.manifest.rds.parameter_group_name)
+          end
+
+          response = Akashi::Aws.rds.client.create_db_instance(options)
 
           new(response[:db_instance_identifier]).tap do |instance|
             puts "Created a RDS (#{instance.id}). Password is \"#{password}\"."
