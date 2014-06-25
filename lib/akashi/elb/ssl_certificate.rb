@@ -18,7 +18,7 @@ module Akashi
             private_key:             OpenSSL::PKey::RSA.new(File.read(private_key_path)).to_pem,
             server_certificate_name: Akashi.name,
           }
-          options.merge!({ certificate_chain: certificate_chain }) if !!certificate_chain
+          options.merge!(certificate_chain: certificate_chain) if !!certificate_chain
 
           response = Akashi::Aws.iam.client.upload_server_certificate(options)
 
