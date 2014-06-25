@@ -16,7 +16,6 @@ module Akashi
             master_username:            Akashi.application,
             master_user_password:       password,
             multi_az:                   !!Akashi.manifest.rds.multi_az,
-            availability_zone:          Akashi.manifest.rds.availability_zone,
             vpc_security_group_ids:     [ security_group.id ],
             db_subnet_group_name:       Akashi.name,
             engine_version:             Akashi.manifest.rds.engine_version,
@@ -25,6 +24,9 @@ module Akashi
           }
           if !!Akashi.manifest.rds.parameter_group_name
             options.merge!(db_parameter_group_name: Akashi.manifest.rds.parameter_group_name)
+          end
+          unless !!Akashi.manifest.rds.multi_az
+            options.merge!(availability_zone: Akashi.manifest.rds.availability_zone)
           end
 
           response = Akashi::Aws.rds.client.create_db_instance(options)
