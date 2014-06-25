@@ -1,12 +1,12 @@
 module Akashi
   class Builder
     def build
+      create_ssl_certificate
       create_vpc
       create_internet_gateway
       create_subnets
       create_security_groups
       create_key_pair
-      create_ssl_certificate
       create_ec2_instances
       create_subnet_group
       create_db_instance
