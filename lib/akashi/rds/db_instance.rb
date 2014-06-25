@@ -6,7 +6,7 @@ module Akashi
 
       class << self
         def create(security_group:)
-          password = Akashi.manifest.rds.password || random_password(10)
+          password = Akashi.manifest.rds.password || random_password(length: 10)
           options  = {
             db_name:                    Akashi.name(separator: "_"),
             db_instance_identifier:     Akashi.name,
@@ -36,7 +36,7 @@ module Akashi
           end
         end
 
-        def random_password(length)
+        def random_password(length:)
           [*0..9, *"a".."z", *"A".."Z"].sample(length).join
         end
 
