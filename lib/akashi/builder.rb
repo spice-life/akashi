@@ -16,7 +16,9 @@ module Akashi
     private
 
     def create_ssl_certificate
-      @ssl_certificate = Akashi::Elb::SslCertificate.create
+      @ssl_certificate = !!Akashi.manifest.elb.ssl_certificate.name ?
+        Akashi::Elb::SslCertificate.find_by(name: Akashi.manifest.elb.ssl_certificate.name) :
+        Akashi::Elb::SslCertificate.create
     end
 
     def create_vpc
