@@ -15,6 +15,10 @@ module Akashi
 
     private
 
+    def create_ssl_certificate
+      @ssl_certificate = Akashi::Elb::SslCertificate.create
+    end
+
     def create_vpc
       @vpc = Akashi::Vpc::Instance.create
 
@@ -83,10 +87,6 @@ module Akashi
 
     def create_db_instance
       @db_instance = Akashi::Rds::DbInstance.create(security_group: security_group[:rds])
-    end
-
-    def create_ssl_certificate
-      @ssl_certificate = Akashi::Elb::SslCertificate.create
     end
 
     def create_load_balancer
