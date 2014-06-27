@@ -22,7 +22,6 @@ module Akashi
                 ebs:          {
                   volume_size:           allocated_storage,
                   delete_on_termination: true,
-                  volume_type:           "standard",
                 },
               },
             ],
