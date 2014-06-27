@@ -66,11 +66,10 @@ module Akashi
 
             (subnet.instance.number_of_instances || 1).times do
               ec2_instances[role_name] << Akashi::Ec2::Instance.create(
-                ami:               ami,
-                instance_class:    subnet.instance.instance_class,
-                security_group:    security_group[role_name],
-                subnet:            _subnet,
-                allocated_storage: subnet.instance.allocated_storage || 8,
+                ami:            ami,
+                instance_class: subnet.instance.instance_class,
+                security_group: security_group[role_name],
+                subnet:         _subnet,
               )
             end
           end
