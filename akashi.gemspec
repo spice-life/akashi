@@ -6,7 +6,7 @@ require 'akashi/version'
 Gem::Specification.new do |spec|
   spec.name          = "akashi"
   spec.version       = Akashi::VERSION
-  spec.authors       = ["asonas", "int_remain"]
+  spec.authors       = ["asonas", "kirikiriyamama"]
   spec.email         = ["hzw1258@gmail.com", "ponde.ponde.ponde@gmail.com"]
   spec.description   = %q{Wrapping aws-sdk}
   spec.summary       = %q{Wrapping awd-sdk}
